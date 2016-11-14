@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Todo list";
+}
+
+<div ng-app="app">
+    <div ng-controller="TodoItemCtrl" class="separated-rows-container">
+
+        <h2>
+            Todo List
+        </h2>
+
+        <div class="row">
+            <div class="col-md-3">
+                <button class="btn btn-primary form-control" ng-click="addItem()">
+                    + Add item
+                </button>
+            </div>
+        </div>
+
+        <div ng-repeat="item in todoItems | orderBy: 'Done'">
+            <div class="row">
+                <div class="col-md-3">
+                    <input class="form-control"
+                           ng-model="item.Text"
+                           ng-change="saveChanges(item)"
+                           ng-readonly="item.Done" />
+                </div>
+                <div class="col-md-3">
+                    <p>
+                        <input type="checkbox"
+                               ng-model="item.Done"
+                               ng-change="saveChanges(item)"
+                               ng-disabled="!canBeDone(item)" />
+
+                        <span class="glyphicon glyphicon-remove"
+                              ng-click="remove(item)"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
